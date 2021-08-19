@@ -1,0 +1,9 @@
+name: Hypixelweapons
+main: cf.soulwastaken.hypixelweapons.hypixelweaponsplugin
+version: 0.1-Beta
+api-version: 1.17
+author: iSoul__
+description: A plugin that adds some of the weapons from hypixel skyblock
+commands:
+  hyperion:
+    description: Command to get the hyperion
