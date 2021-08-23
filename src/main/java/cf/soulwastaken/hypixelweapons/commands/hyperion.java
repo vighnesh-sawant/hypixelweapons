@@ -44,18 +44,6 @@ public class hyperion implements CommandExecutor{
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', hypixelweaponsplugin.getInternalConfig().noPermMessage));
                     return false;
                 }
-            } else if (args[0].equalsIgnoreCase("reload")) {
-                if (sender.hasPermission(hypixelweaponsutil.HYPIXEL_WEAPONS_RELOAD_PERM)) {
-                    hypixelweaponsplugin.getInternalConfig().reloadConfig();
-                    sender.sendMessage(ChatColor.DARK_GREEN + "[HypixelWeapons Config Reloaded]");
-                    return true;
-
-
-                } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', hypixelweaponsplugin.getInternalConfig().noPermMessage));
-                    return false;
-                }
-
             } else {
                 sender.sendMessage(ChatColor.DARK_RED + "That is not a valid player!");
 

@@ -7,3 +7,5 @@ description: A plugin that adds some of the weapons from hypixel skyblock
 commands:
   hyperion:
     description: Command to get the hyperion
+  bonemerang:
+    description: Command to get the Bonemerang

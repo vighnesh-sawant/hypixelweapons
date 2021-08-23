@@ -4,6 +4,8 @@ import cf.soulwastaken.hypixelweapons.hypixelweaponsplugin;
 import org.bukkit.NamespacedKey;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,15 +18,19 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+
+import javax.print.attribute.standard.MediaSize;
 
 public class hypixelweaponsutil {
     public static final NamespacedKey HYPERION_KEY = new NamespacedKey(hypixelweaponsplugin.getInstance(),"Hyperion");
     public static final String HYPERION_USE_PERM = "hypixelweapons.hyperion.use";
     public static final String HYPERION_GIVE_SELF_PERM = "hypixelweapons.hyperion.give.self";
-    public static final String HYPERION_GIVE_OTHERS_PERM = "hypixelweapons. hyperion.give.others";
+    public static final String HYPERION_GIVE_OTHERS_PERM = "hypixelweapons.hyperion.give.others";
     public static final String HYPIXEL_WEAPONS_RELOAD_PERM = "hypixelweapons.reload";
     private static final ArrayList<Permission> perms = new ArrayList<>();
-    private static final ArrayList lore = new ArrayList<String>(Arrays.asList("§7Gear Score: §d1102 §8(3189)",
+    private static final ArrayList hyperionlore = new ArrayList<String>(Arrays.asList("§7Gear Score: §d1102 §8(3189)",
             "§7Damage: §c+317 §e(+30) §8(+1,008.06)",
             "§7Strength: §c+382 §e(+30) §6[+5] §9(Withered +197) §8(+1,214.76)",
             "§7Crit Damage: §c+60% §8(+190.8%)",
@@ -67,7 +73,16 @@ public class hypixelweaponsutil {
             "§cCatacombs §7level.",
             " ",
             "§d§l§kA§a §d§lMYTHIC DUNGEON SWORD §kA"));
+    private static final ArrayList bonemeranglore = new ArrayList<String>(Arrays.asList(" §7Damage: §c+70",
+            " ",
+            "§6Item Ability: Swing §e§lRIGHT CLICK",
+            "§7Throw bone a short distance, dealing",
+            "§7the damage an arrow would.",
+            " ",
+            "§6§lLEGENDARY BOW"));
 
+    public static final NamespacedKey BONEMERANG_KEY = new NamespacedKey(hypixelweaponsplugin.getInstance(),"bonemerangduh");
+    public static final NamespacedKey BONEMERANG_KEYY = new NamespacedKey(hypixelweaponsplugin.getInstance(),"bonemerangduhh");
 
     private hypixelweaponsutil() {}
     public static ItemStack createHyperion(){
@@ -75,7 +90,7 @@ public class hypixelweaponsutil {
         ItemMeta meta = hyperion.getItemMeta();
         String itemname = hypixelweaponsplugin.getInternalConfig().itemname;
         meta.setDisplayName(itemname);
-        meta.setLore(lore);
+        meta.setLore(hyperionlore);
         meta.setUnbreakable(true);
         meta.addEnchant(Enchantment.DAMAGE_ALL,5,true);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -116,6 +131,67 @@ public class hypixelweaponsutil {
         return success;
 
     }
+    public static ItemStack createBonemerang(){
+        ItemStack bonemerang = new ItemStack(Material.BONE);
+        ItemMeta meta = bonemerang.getItemMeta();
+        String itemname = hypixelweaponsplugin.getInternalConfig().bitemname;
+        meta.setDisplayName(itemname);
+        meta.setLore(bonemeranglore);
+        meta.setUnbreakable(true);
+        bonemerang.addUnsafeEnchantment(Enchantment.PIERCING, 69);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        UUID uuid = UUID.randomUUID();
+        String uuidAsString = uuid.toString();
+        meta.getPersistentDataContainer().set(BONEMERANG_KEY, PersistentDataType.STRING, uuidAsString);
+
+        bonemerang.setItemMeta(meta);
+        return bonemerang;
+    }
+    public static boolean isBonemerang(ItemStack stack){
+        String itemname = hypixelweaponsplugin.getInternalConfig().bitemname;
+        if(stack == null || stack.getType() != Material.BONE || !stack.hasItemMeta() || !stack.getItemMeta().hasDisplayName())return false;
+        else if(stack.getItemMeta().getDisplayName().equals(itemname))return true;
+        else return false;
+    }
+    public static ItemStack createGhasttear() {
+        ItemStack bonemerang = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta meta = bonemerang.getItemMeta();
+        String itemname = hypixelweaponsplugin.getInternalConfig().bitemname;
+        meta.setDisplayName(itemname);
+        meta.setUnbreakable(true);
+        bonemerang.addUnsafeEnchantment(Enchantment.PIERCING, 69);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        meta.getPersistentDataContainer().set(BONEMERANG_KEYY, PersistentDataType.STRING, "bone");
+
+
+        bonemerang.setItemMeta(meta);
+        return bonemerang;
+
+    }
+    public static boolean isGhasttear(ItemStack stack){
+        ItemMeta itemMeta = stack.getItemMeta();
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+        if(container.has(BONEMERANG_KEYY , PersistentDataType.STRING)) {
+            String foundValue =  container.get(BONEMERANG_KEYY, PersistentDataType.STRING);
+           if(foundValue == "bone"){
+               return true;
+
+
+           }
+           else return false;
+
+
+
+        }
+        return false;
+
+    }
+
+
     public static void registerPermissions(){
         perms.add(new Permission(HYPERION_USE_PERM,"Allows player to use the HYPERION",PermissionDefault.TRUE));
         perms.add(new Permission(HYPERION_GIVE_SELF_PERM,"Allows player to give themselves the  HYPERION",PermissionDefault.OP));
@@ -137,6 +213,7 @@ public class hypixelweaponsutil {
 
         perms.clear();
     }
+
 
 
 

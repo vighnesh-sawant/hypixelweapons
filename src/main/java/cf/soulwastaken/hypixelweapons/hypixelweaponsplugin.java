@@ -1,6 +1,8 @@
 package cf.soulwastaken.hypixelweapons;
 
+import cf.soulwastaken.hypixelweapons.commands.bonemerangcommand;
 import cf.soulwastaken.hypixelweapons.commands.hyperion;
+import cf.soulwastaken.hypixelweapons.events.bonemerang;
 import cf.soulwastaken.hypixelweapons.events.hypixelweaponsevents;
 import cf.soulwastaken.hypixelweapons.utils.hypixelweaponsutil;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,9 +19,11 @@ public class hypixelweaponsplugin extends JavaPlugin {
         plugin = this;
         config = new Config();
         Bukkit.getPluginManager().registerEvents(new hypixelweaponsevents(), this);
+        Bukkit.getPluginManager().registerEvents(new bonemerang(), this);
         hypixelweaponsutil.registerHyperionRecipe();
         hypixelweaponsutil.registerPermissions();
         this.getCommand("hyperion").setExecutor(new hyperion());
+        this.getCommand("bonemerang").setExecutor(new bonemerangcommand());
         logger.info("Hypixelweapons has successfully been enabled ");
 
     }
