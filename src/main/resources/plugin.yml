@@ -1,6 +1,6 @@
 name: Hypixelweapons
 main: cf.soulwastaken.hypixelweapons.hypixelweaponsplugin
-version: 0.1-Beta
+version: 1.0
 api-version: 1.17
 author: iSoul__
 description: A plugin that adds some of the weapons from hypixel skyblock

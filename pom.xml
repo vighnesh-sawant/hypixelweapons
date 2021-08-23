@@ -6,7 +6,7 @@
 
     <groupId>cf.soulwastaken</groupId>
     <artifactId>Hypixelweapons</artifactId>
-    <version>0.1-Beta</version>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
