@@ -9,3 +9,5 @@ commands:
     description: Command to get the hyperion
   bonemerang:
     description: Command to get the Bonemerang
+  magebeam:
+    description: Command to enable magebeam

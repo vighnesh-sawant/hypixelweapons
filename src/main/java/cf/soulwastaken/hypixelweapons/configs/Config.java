@@ -21,8 +21,10 @@ public class Config {
     public static final String ITEM_NAME = "hyperion.item_name";
     public static final String B_ITEM_NAME = "bonemerang.item_name";
     public static final String B_DAMAGE = "bonemerang.damage";
+    public static final String M_DAMAGE = "magebeam.damage";
+    public static final String M_RANGE = "magebeam.range";
     public String noPermMessage, blocksInWayMessage, abilityMessage, itemname , bitemname;
-    public int teleportwide, implosionradius, implosiondamagelower, implosiondamagehigher, abilitydelay, withershielddelay , bdamage;
+    public int teleportwide, implosionradius, implosiondamagelower, implosiondamagehigher, abilitydelay, withershielddelay , bdamage , mdamage , mrange;
     public boolean playsound, playeffect;
 
 
@@ -47,6 +49,8 @@ public class Config {
         itemname = config.getString(ITEM_NAME, "§dWithered Hyperion §c✪✪✪✪§6✪");
         bitemname = config.getString(B_ITEM_NAME, "§dSpiritual Bonemerang §c✪✪✪✪§6✪");
         bdamage = config.getInt(B_DAMAGE, 15);
+        mdamage = config.getInt(M_DAMAGE, 15);
+        mrange = config.getInt(M_RANGE, 10);
     }
 
     public void setDefaults() {
@@ -65,6 +69,8 @@ public class Config {
         config.addDefault(ITEM_NAME, "§dWithered Hyperion §c✪✪✪✪§6✪");
         config.addDefault(B_ITEM_NAME, "§dSpiritual Bonemerang §c✪✪✪✪§6✪");
         config.addDefault(B_DAMAGE, 15);
+        config.addDefault(M_DAMAGE, 15);
+        config.addDefault(M_RANGE, 10);
 
         config.options().copyDefaults(true);
         hypixelweaponsplugin.getInstance().saveConfig();
@@ -86,6 +92,8 @@ public class Config {
         config.set(ITEM_NAME, itemname);
         config.set(B_ITEM_NAME, bitemname);
         config.set(B_DAMAGE, bdamage);
+        config.set(M_DAMAGE, mdamage);
+        config.set(M_RANGE, mrange);
         hypixelweaponsplugin.getInstance().saveConfig();
 
     }
